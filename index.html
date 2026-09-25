@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApeexCloud | High-Performance VPS & Minecraft Hosting</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Space Grotesk, Orbitron & Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#070505',
+                            card: '#120a0a',
+                            cardHover: '#1c0f0f',
+                            border: '#2e1416',
+                            red: '#ff2a32',
+                            redDark: '#e6001a',
+                            crimson: '#ff003c',
+                            redGlow: 'rgba(255, 42, 50, 0.4)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-red': '0 0 25px -3px rgba(255, 42, 50, 0.55)',
+                        'glow-lg': '0 0 50px -10px rgba(255, 0, 60, 0.4)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #070505;
+            color: #e2e8f0;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Dark Futuristic Grid Background */
+        .bg-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 42, 50, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 42, 50, 0.03) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(18, 10, 10, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 42, 50, 0.15);
+        }
+
+        .glass-card-featured {
+            background: rgba(28, 12, 14, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 42, 50, 0.65);
+        }
+
+        /* Animated Red Text Gradient */
+        .gradient-text-red {
+            background: linear-gradient(135deg, #ff4d52 0%, #ff2a32 50%, #d60018 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Red Primary Button Styling */
+        .btn-gradient-red {
+            background: linear-gradient(135deg, #ff2a32 0%, #e6001a 50%, #990012 100%);
+            background-size: 200% auto;
+            transition: all 0.3s ease;
+        }
+        .btn-gradient-red:hover {
+            background-position: right center;
+            box-shadow: 0 0 25px rgba(255, 42, 50, 0.65);
+        }
+
+        .hover-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-glow:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 42, 50, 0.55);
+            box-shadow: 0 12px 32px -8px rgba(255, 42, 50, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-grid-pattern relative">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-brand-border/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-red via-brand-crimson to-black p-[2px] transition-transform duration-300 group-hover:scale-105">
+                    <div class="w-full h-full bg-brand-dark rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid font-bold text-brand-red text-xl fa-cloud-bolt"></i>
+                    </div>
+                </div>
+                <span class="font-display font-extrabold text-xl sm:text-2xl tracking-wider text-white">
+                    APEEX<span class="text-brand-red">CLOUD</span>
+                </span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-7 text-sm font-medium">
+                <a href="#vps" class="text-slate-300 hover:text-brand-red transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-server text-xs text-brand-red"></i>
+                    <span>VPS Hosting</span>
+                </a>
+                <a href="#minecraft" class="text-slate-300 hover:text-brand-red transition-colors flex items-center space-x-2 relative">
+                    <i class="fa-solid fa-cube text-xs text-brand-red"></i>
+                    <span>Minecraft</span>
+                    <span class="text-[9px] bg-brand-red text-white px-1.5 py-0.5 rounded-full uppercase font-bold tracking-widest">Soon</span>
+                </a>
+                <a href="#about-owner" class="text-slate-300 hover:text-brand-red transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-user-astronaut text-xs text-brand-red"></i>
+                    <span>Founder</span>
+                </a>
+                <a href="#features" class="text-slate-300 hover:text-brand-red transition-colors">Why Apeex</a>
+                <a href="#support" class="text-slate-300 hover:text-brand-red transition-colors">Support</a>
+            </nav>
+
+            <!-- Primary Action Button (Clean portal redirect, NO download button) -->
+            <div class="hidden sm:flex items-center space-x-3">
+                <a href="https://client.apeexcloud.com" target="_blank" class="btn-gradient-red text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center space-x-2 shadow-neon-red">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Client Portal</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-brand-border px-6 py-6 space-y-4">
+            <a href="#vps" class="block text-slate-200 hover:text-brand-red font-medium">VPS Hosting</a>
+            <a href="#minecraft" class="block text-slate-200 hover:text-brand-red font-medium flex items-center justify-between">
+                <span>Minecraft Hosting</span>
+                <span class="text-[10px] bg-brand-red text-white px-2 py-0.5 rounded-full uppercase font-bold">Soon</span>
+            </a>
+            <a href="#about-owner" class="block text-slate-200 hover:text-brand-red font-medium">Founder</a>
+            <a href="#features" class="block text-slate-200 hover:text-brand-red font-medium">Why Choose Us</a>
+            <a href="#support" class="block text-slate-200 hover:text-brand-red font-medium">Support</a>
+            <div class="pt-4 border-t border-brand-border">
+                <a href="https://client.apeexcloud.com" target="_blank" class="btn-gradient-red w-full text-center text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Client Portal</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <!-- Ambient Glowing Red Orb Background -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-red/15 blur-[140px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card border border-brand-red/40 text-brand-red text-xs sm:text-sm font-semibold mb-8 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-brand-red"></span>
+                <span>Hardware DDoS Filtering Enabled On All VPS Nodes</span>
+            </div>
+
+            <h1 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                ULTRA-FAST VPS & <br class="hidden sm:inline" />
+                <span class="gradient-text-red">CLOUD HOSTING</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg mb-10 font-normal leading-relaxed">
+                Supercharge your web projects, databases, and gaming servers on hyper-reliable KVM Virtual Private Servers with zero latency and enterprise-grade hardware.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#vps" class="w-full sm:w-auto btn-gradient-red px-8 py-4 rounded-xl text-white font-bold text-base shadow-neon-red transition-all flex items-center justify-center space-x-3">
+                    <span>Explore VPS Plans</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+                <a href="#minecraft" class="w-full sm:w-auto glass-card hover:bg-brand-red/10 border border-brand-red/40 px-8 py-4 rounded-xl text-slate-200 font-bold text-base transition-all flex items-center justify-center space-x-3">
+                    <i class="fa-solid fa-cube text-brand-red"></i>
+                    <span>Minecraft Hosting (Soon)</span>
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-4xl mx-auto">
+                <div class="glass-card p-4 sm:p-6 rounded-2xl border-l-2 border-brand-red">
+                    <div class="font-display font-bold text-2xl sm:text-3xl text-brand-red">99.9%</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1">Uptime SLA</div>
+                </div>
+                <div class="glass-card p-4 sm:p-6 rounded-2xl border-l-2 border-brand-red">
+                    <div class="font-display font-bold text-2xl sm:text-3xl text-white">&lt; 10ms</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1">Low Latency</div>
+                </div>
+                <div class="glass-card p-4 sm:p-6 rounded-2xl border-l-2 border-brand-red">
+                    <div class="font-display font-bold text-2xl sm:text-3xl text-brand-red">100%</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1">DDoS Protected</div>
+                </div>
+                <div class="glass-card p-4 sm:p-6 rounded-2xl border-l-2 border-brand-red">
+                    <div class="font-display font-bold text-2xl sm:text-3xl text-white">Instant</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1">Deployment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VPS Pricing Section -->
+    <section id="vps" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mb-4">
+                    HIGH PERFORMANCE <span class="text-brand-red">VPS PLANS</span>
+                </h2>
+                <p class="text-slate-400 text-base max-w-xl mx-auto">
+                    Full KVM virtualization with guaranteed hardware resources and complete root SSH access.
+                </p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+
+                <!-- Starter VPS -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover-glow relative">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Starter VPS</h3>
+                        <p class="text-xs text-slate-400 mt-1">Entry-level VPS hosting</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹249</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-brand-border pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>4 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>2 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>50 GB</strong> Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Intel Xeon E5</span></li>
+                            <li class="flex items-center space-x-3 text-brand-red font-semibold"><i class="fa-solid fa-shield-halved text-brand-red"></i><span>Basic DDoS Protection</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Instant Deploy</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3 px-4 rounded-xl font-semibold text-center text-sm bg-brand-border/60 hover:bg-brand-red hover:text-white transition-all">
+                        Get Starter VPS &rarr;
+                    </a>
+                </div>
+
+                <!-- Micro VPS -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover-glow relative">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Micro VPS</h3>
+                        <p class="text-xs text-slate-400 mt-1">Perfect for small projects</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹399</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-brand-border pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>8 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>3 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>100 GB</strong> Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Intel Xeon E5</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Basic DDoS Protection</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Instant Deploy</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3 px-4 rounded-xl font-semibold text-center text-sm bg-brand-border/60 hover:bg-brand-red hover:text-white transition-all">
+                        Get Micro VPS &rarr;
+                    </a>
+                </div>
+
+                <!-- Macro VPS (MOST POPULAR) -->
+                <div class="glass-card-featured rounded-2xl p-6 flex flex-col justify-between hover-glow relative shadow-neon-red transform lg:-translate-y-2">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-red to-red-600 text-white font-tech font-bold text-xs uppercase px-4 py-1 rounded-full shadow-lg tracking-widest">
+                        ⚡ MOST POPULAR
+                    </div>
+
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white mt-2">Macro VPS</h3>
+                        <p class="text-xs text-brand-red/80 mt-1">Mid-range power</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹599</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-200 border-t border-brand-red/40 pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>16 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>6 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>200 GB</strong> Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Intel Xeon</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Standard DDoS</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Weekly Backups</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3.5 px-4 rounded-xl font-bold text-center text-sm btn-gradient-red text-white shadow-md">
+                        Get Macro VPS &rarr;
+                    </a>
+                </div>
+
+                <!-- Mega VPS -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover-glow relative">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Mega VPS</h3>
+                        <p class="text-xs text-slate-400 mt-1">For demanding workloads</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹849</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-brand-border pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>24 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>8 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>300 GB</strong> Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Intel Xeon / AMD EPYC</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Standard DDoS</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Daily Backups</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3 px-4 rounded-xl font-semibold text-center text-sm bg-brand-border/60 hover:bg-brand-red hover:text-white transition-all">
+                        Get Mega VPS &rarr;
+                    </a>
+                </div>
+
+                <!-- Large VPS -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover-glow relative">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Large VPS</h3>
+                        <p class="text-xs text-slate-400 mt-1">High-performance computing</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹1099</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-brand-border pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>32 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>10 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>400 GB</strong> Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>AMD EPYC 7B13</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Advanced DDoS</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Daily Backups</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3 px-4 rounded-xl font-semibold text-center text-sm bg-brand-border/60 hover:bg-brand-red hover:text-white transition-all">
+                        Get Large VPS &rarr;
+                    </a>
+                </div>
+
+                <!-- Ultra VPS -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover-glow relative">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Ultra VPS</h3>
+                        <p class="text-xs text-slate-400 mt-1">Extreme raw power</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹1599</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-brand-border pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>48 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>12 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>600 GB</strong> NVMe Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>AMD EPYC</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Enterprise DDoS Protection</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Daily Backups</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3 px-4 rounded-xl font-semibold text-center text-sm bg-brand-border/60 hover:bg-brand-red hover:text-white transition-all">
+                        Get Ultra VPS &rarr;
+                    </a>
+                </div>
+
+                <!-- Titan VPS -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between hover-glow relative border-brand-red/50">
+                    <div>
+                        <h3 class="font-display font-bold text-2xl text-white">Titan VPS</h3>
+                        <p class="text-xs text-brand-red mt-1">Ultimate enterprise tier</p>
+                        
+                        <div class="my-6">
+                            <span class="font-display font-extrabold text-4xl text-brand-red">₹2099</span>
+                            <span class="text-slate-400 text-sm">/mo</span>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-300 border-t border-brand-border pt-6">
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>64 GB</strong> RAM</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>16 CPU</strong> Cores</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span><strong>1 TB</strong> NVMe Disk</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>AMD EPYC High Frequency</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Enterprise DDoS Protection</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Full Root Access</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>KVM Virtualization</span></li>
+                            <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-brand-red"></i><span>Daily Backups</span></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://client.apeexcloud.com" target="_blank" class="mt-8 w-full py-3 px-4 rounded-xl font-semibold text-center text-sm bg-brand-red/20 text-brand-red border border-brand-red/40 hover:bg-brand-red hover:text-white transition-all">
+                        Get Titan VPS &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Minecraft Hosting Coming Soon Section -->
+    <section id="minecraft" class="py-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-brand-red/50 relative bg-gradient-to-br from-brand-card via-[#1c0a0c] to-brand-card overflow-hidden">
+                
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center space-x-2 bg-brand-red/20 text-brand-red border border-brand-red/50 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                        <i class="fa-solid fa-cube text-amber-400"></i>
+                        <span>Gaming Node Launch</span>
+                    </div>
+
+                    <h2 class="font-display text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
+                        Minecraft Hosting <br />
+                        <span class="gradient-text-red">COMING SOON</span>
+                    </h2>
+
+                    <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+                        High-frequency Ryzen & EPYC gaming nodes engineered for lag-free Minecraft gameplay, PaperMC, Spigot, Forge, custom modpack installers, and Pterodactyl Game Panel.
+                    </p>
+
+                    <!-- Feature Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
+                        <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 border-slate-800">
+                            <i class="fa-solid fa-bolt text-brand-red text-lg"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-200">Ultra Low Latency</span>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 border-slate-800">
+                            <i class="fa-solid fa-cubes text-brand-red text-lg"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-200">1-Click Modpacks</span>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 border-slate-800">
+                            <i class="fa-solid fa-sliders text-brand-red text-lg"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-200">Pterodactyl Panel</span>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 border-slate-800">
+                            <i class="fa-solid fa-shield-halved text-brand-red text-lg"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-200">Game DDoS Filter</span>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 border-slate-800">
+                            <i class="fa-solid fa-rocket text-brand-red text-lg"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-200">Instant Setup</span>
+                        </div>
+                        <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 border-slate-800">
+                            <i class="fa-solid fa-floppy-disk text-brand-red text-lg"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-slate-200">Auto Backups</span>
+                        </div>
+                    </div>
+
+                    <!-- Early Access Subscription Form -->
+                    <div class="glass-card p-2 sm:p-2.5 rounded-2xl border border-brand-border max-w-lg">
+                        <form id="notify-form" onsubmit="handleNotifySubmit(event)" class="flex flex-col sm:flex-row gap-2">
+                            <input 
+                                type="email" 
+                                required 
+                                placeholder="Enter email for priority launch notification..." 
+                                class="bg-transparent px-4 py-3 text-slate-100 text-sm focus:outline-none flex-1 rounded-xl placeholder-slate-500"
+                            />
+                            <button type="submit" class="btn-gradient-red text-white font-bold text-sm px-6 py-3 rounded-xl whitespace-nowrap hover:opacity-90">
+                                Notify Me 🔔
+                            </button>
+                        </form>
+                    </div>
+                    <p id="notify-msg" class="text-brand-red text-xs font-semibold mt-3 hidden">
+                        <i class="fa-solid fa-circle-check"></i> Subscribed! We will notify you as soon as Minecraft Hosting goes live.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Meet the Founder / Owner Bio Section -->
+    <section id="about-owner" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-brand-red/40 bg-gradient-to-r from-brand-card via-[#1a0a0c] to-brand-card relative overflow-hidden shadow-glow-lg">
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Avatar Badge -->
+                    <div class="md:col-span-4 flex justify-center">
+                        <div class="relative group">
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-red to-red-600 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+                            
+                            <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-2xl bg-brand-dark border-2 border-brand-red flex flex-col items-center justify-center p-4 text-center">
+                                <div class="w-20 h-20 rounded-full bg-brand-red/10 border border-brand-red flex items-center justify-center text-brand-red text-4xl mb-3 shadow-neon-red">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                </div>
+                                <h4 class="font-display font-extrabold text-2xl text-white">Yashraj Yadav</h4>
+                                <span class="text-xs text-brand-red font-semibold uppercase tracking-widest mt-1">Founder & CEO</span>
+                                <div class="inline-flex items-center space-x-1.5 text-xs text-slate-400 mt-2 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800">
+                                    <i class="fa-solid fa-location-dot text-brand-red"></i>
+                                    <span>Indore, MP, India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Founder Bio Details -->
+                    <div class="md:col-span-8">
+                        <div class="inline-flex items-center space-x-2 bg-brand-red/10 text-brand-red border border-brand-red/30 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+                            <i class="fa-solid fa-crown text-amber-400"></i>
+                            <span>Meet The Founder</span>
+                        </div>
+
+                        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-3">
+                            DRIVEN BY PASSION, <span class="gradient-text-red">POWERED BY SPEED.</span>
+                        </h2>
+
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                            Founded by <strong>Yashraj Yadav</strong>, a 16-year-old tech entrepreneur from Indore, ApeexCloud was built to deliver hyper-optimized, low-latency, and DDoS-protected cloud server infrastructure at accessible prices for developers, gamers, and communities.
+                        </p>
+
+                        <!-- Key Details -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-brand-border pt-6">
+                            <div class="glass-card p-3 rounded-xl border border-brand-border/60">
+                                <span class="text-xs text-slate-400 block">Founder</span>
+                                <span class="font-tech font-bold text-white text-base">Yashraj Yadav</span>
+                            </div>
+
+                            <div class="glass-card p-3 rounded-xl border border-brand-border/60">
+                                <span class="text-xs text-slate-400 block">Age</span>
+                                <span class="font-tech font-bold text-brand-red text-base">16 Years Old</span>
+                            </div>
+
+                            <div class="glass-card p-3 rounded-xl border border-brand-border/60 col-span-2 sm:col-span-1">
+                                <span class="text-xs text-slate-400 block">Location</span>
+                                <span class="font-tech font-bold text-white text-base">Indore, MP, India</span>
+                            </div>
+                        </div>
+
+                        <!-- Motivation Quote -->
+                        <div class="mt-6 p-4 rounded-xl bg-brand-red/10 border-l-4 border-brand-red text-slate-200 italic text-sm sm:text-base font-medium flex items-center space-x-3">
+                            <i class="fa-solid fa-quote-left text-brand-red text-xl"></i>
+                            <span>"Driven by passion, powered by speed."</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mb-4">
+                    WHY CHOOSE <span class="text-brand-red">APEEXCLOUD</span>
+                </h2>
+                <p class="text-slate-400 text-base max-w-xl mx-auto">
+                    Built with enterprise hardware for non-stop uptime and ultimate server response times.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-6 rounded-2xl border border-brand-border hover:border-brand-red/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/10 flex items-center justify-center text-brand-red text-2xl mb-5">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">NVMe Storage</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        High-speed NVMe SSD storage giving maximum IOPS for database-intensive applications.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-brand-border hover:border-brand-red/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/10 flex items-center justify-center text-brand-red text-2xl mb-5">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">DDoS Protection</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Hardware DDoS mitigation actively filters malicious traffic across all VPS plans.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-brand-border hover:border-brand-red/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/10 flex items-center justify-center text-brand-red text-2xl mb-5">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">24/7 Support</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Responsive ticket support team ready to assist with deployment and server queries.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-brand-border hover:border-brand-red/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/10 flex items-center justify-center text-brand-red text-2xl mb-5">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Full Root Control</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Unrestricted root SSH access allowing you to install custom OS distros, Docker, or web panels.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support CTA Section -->
+    <section id="support" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden border-brand-red/30">
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">
+                    Ready To Deploy Your High-Performance Cloud Node?
+                </h2>
+                <p class="text-slate-400 text-base max-w-xl mx-auto mb-8">
+                    Instant provisioning on full KVM virtualization with round-the-clock reliability.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://client.apeexcloud.com" target="_blank" class="btn-gradient-red text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-md">
+                        Get Started Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-card border-t border-brand-border/80 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <div>
+                    <a href="#" class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-red flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-xl text-white">APEEX<span class="text-brand-red">CLOUD</span></span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        High performance, low-latency Virtual Private Server and Game Server hosting for developers and gaming communities.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-display text-white font-bold text-sm uppercase tracking-wider mb-4">Services</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#vps" class="hover:text-brand-red transition-colors">Starter VPS (4GB RAM)</a></li>
+                        <li><a href="#vps" class="hover:text-brand-red transition-colors">Macro VPS (Popular)</a></li>
+                        <li><a href="#vps" class="hover:text-brand-red transition-colors">Titan VPS</a></li>
+                        <li><a href="#minecraft" class="hover:text-brand-red transition-colors">Minecraft Hosting (Soon)</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-display text-white font-bold text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="https://client.apeexcloud.com" target="_blank" class="hover:text-brand-red transition-colors">Client Portal</a></li>
+                        <li><a href="#about-owner" class="hover:text-brand-red transition-colors">About Founder</a></li>
+                        <li><a href="#features" class="hover:text-brand-red transition-colors">Why Choose Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-display text-white font-bold text-sm uppercase tracking-wider mb-4">Legal</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-brand-red transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-brand-border/80 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 ApeexCloud. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Founded by Yashraj Yadav (Indore, MP, India)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Drawer Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form Submit Handler
+        function handleNotifySubmit(e) {
+            e.preventDefault();
+            document.getElementById('notify-msg').classList.remove('hidden');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
